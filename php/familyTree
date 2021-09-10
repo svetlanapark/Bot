@@ -1,0 +1,58 @@
+<?php
+class Person {
+
+    private $name;
+    private $lastname;
+    private $age;
+    private $mother;
+    private $father;
+
+    function __construct($name, $lastname, $age, $mother=null, $father=null)
+    {
+    $this->name = $name;
+    $this->lastname = $lastname;
+    $this->age = $age;
+    $this->mother=$mother;
+    $this->father=$father;
+    }
+    function getName()
+    {
+        return $this->name;
+    }
+    function getMother()
+    {
+        return $this->mother;
+    }
+    function getFather()
+    {
+        return $this->father;
+    }
+    function getLastname()
+    {
+        return $this->lastname; 
+    }
+    function getAge()
+    {
+        return $this->age;
+    }
+    function getInfo()
+    {
+        return "<h3>A few words about me and my family.</h3><br>"."<h4>ME</h4><br>My name is: ".$this->getName()."<br>My lastname is: ".$this->getLastname()."<br>My age: ".$this->getAge()."<br>
+        <h4>MY MOM</h4><br>My mother's name: ".$this->getMother()->getName()."<br>Her age is: ".$this->getMother()->getAge()."<br>
+        <h4>MY DAD</h4><br>My father's name: ".$this->getFather()->getName()."<br>His age is: ".$this->getFather()->getAge()."<br>
+        <h4>MY GRANDFATHER (MOM'S DAD)</h4><br>His name is: ".$this->getMother()->getFather()->getName()."<br>His lastname is: ".$this->getMother()->getFather()->getLastname()."<br>His age: ".$this->getMother()->getFather()->getAge()."<br>
+        <h4>MY GRANDMOTHER (MOM'S MOM)</h4><br>".$this->getMother()->getMother()."
+        <h4>MY GRANDFATHER (DAD'S DAD)</h4><br>His name is: ".$this->getFather()->getFather()->getName()."<br>His lastname: ".$this->getFather()->getFather()->getLastname()."<br>Age: ".$this->getFather()->getFather()->getAge()."<br>
+        <h4>MY GRANDMOTHER (DAD'S MOM)</h4><br>Her name is: ".$this->getFather()->getMother()->getName()."<br>Age is: ".$this->getFather()->getMother()->getAge()."";
+}
+}
+
+$igor = new Person("Igor","Petrov",68); //папа ольги
+$ivan = new Person("Ivan", "Ivanov",70); //папа алекса
+$marta = new Person("Marta", "Ivanova",65); //мама алекса
+$alex = new Person("Alex","Ivanov",42,$marta,$ivan);
+$olga = new Person("Olga","Ivanova",42,null,$igor);
+$valera = new Person("Valera", "Ivanov", 15,$olga,$alex);
+
+echo $valera->getInfo();
+?>
